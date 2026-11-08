@@ -22,6 +22,7 @@
         <div class="project-title-row"><h1 id="headerProjectName">Casa Los Pinos</h1><span class="save-dot" id="saveDot"></span><span id="saveText" class="save-text">Guardado</span></div>
       </div>
       <div class="header-actions">
+        <button class="btn btn-secondary" id="photoGuideBtn">Crear desde fotos</button>
         <button class="btn btn-ghost header-desktop" id="importBtn"><span data-icon="upload"></span> Importar</button>
         <button class="btn btn-secondary" id="projectInfoBtn"><span data-icon="sliders"></span><span class="header-desktop-inline"> Ficha</span></button>
         <button class="btn btn-primary" id="exportBtn"><span data-icon="download"></span><span class="header-desktop-inline"> Exportar</span></button>
@@ -47,9 +48,10 @@
             <label class="switch-row"><span><span data-icon="magnet"></span> Ajustar a cuadrícula</span><input type="checkbox" id="useSnap" checked><i></i></label>
             <label class="switch-row"><span><span data-icon="ruler"></span> Cotas al seleccionar</span><input type="checkbox" id="showCotas" checked><i></i></label>
           </div>
+          <button class="btn btn-secondary block" id="templatesBtn">Plantillas y símbolos</button><br><button class="btn btn-secondary block" id="polygonSidesBtn">Polígono por medidas</button><br><button class="btn btn-secondary block" id="photosBtn">Fotos del proyecto</button><br><button class="btn btn-secondary block" id="exactRectBtn">Crear rectángulo con medidas</button><p class="small-help">Ingresa ancho y largo para añadir un espacio.</p><br>
           <div class="tip-card"><span class="tip-icon" data-icon="lightbulb"></span><strong>Un plano a la vez, todo medido.</strong><p>Dibuja espacios en metros y Linde calcula sus áreas automáticamente.</p><button id="helpBtn" class="text-link">Ver guía rápida <span data-icon="arrow-up-right"></span></button></div>
         </div>
-        <div class="sidebar-bottom"><span class="status-online"></span> Datos guardados en este navegador <span class="version">v1.0</span></div>
+        <div class="sidebar-bottom"><span class="status-online"></span> Guardado solo en este navegador <span class="version">v1.0</span></div>
       </aside>
 
       <main class="stage" id="stage">
@@ -94,6 +96,7 @@
     </div>
   </div>
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <input type="file" id="photoFile" accept="image/jpeg,image/png,image/webp" hidden>
   <input type="file" id="jsonFile" accept=".json,application/json" hidden>
 
   <div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">

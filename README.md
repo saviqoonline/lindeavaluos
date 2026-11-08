@@ -46,3 +46,16 @@ El dibujo y los cálculos son una ayuda de campo, **no sustituyen** levantamient
 - `favicon.svg`: ícono del producto.
 
 Fuente opcional cargada de Google Fonts cuando hay conexión; si no, usa tipografía del sistema. Todo el editor funciona sin dependencias JS externas.
+
+## Crear un croquis desde fotos
+
+Pulsa **Crear desde fotos**, copia las instrucciones y pégalas en ChatGPT junto con las fotografías. Copia la respuesta y pégala en Linde para crear un proyecto nuevo. Linde no envía fotos ni se conecta a un servicio de IA. La interpretación puede contener errores u omisiones: comprueba todas las medidas y relaciones con el original. La información ilegible debe quedar como advertencia, no como una medida supuesta.
+
+El respaldo de todos los proyectos se descarga desde Exportar → Respaldar todos y se recupera con Importar. La comparación de área se configura en Ficha; compara únicamente superficies equivalentes. Las alertas de geometría son orientativas y no detectan todos los casos.
+
+## Herramientas adicionales
+
+- **Polígono por medidas:** agrega lados con longitud y dirección o ángulo; el último punto se une al primero. Revisa que el cierre corresponda a la medición.
+- **Plantillas y símbolos:** inserta espacios de ejemplo o etiquetas de acceso y escalera; modifica las medidas de ejemplo.
+- **Fotos:** añade imágenes al proyecto o a un espacio seleccionado. Puedes escribir una descripción y seleccionar cuáles aparecerán en la ficha. Las imágenes se reducen y se guardan localmente; el espacio del navegador es limitado. Los respaldos JSON incluyen las fotos.
+- La ficha PDF incluye un croquis por nivel y las fotografías seleccionadas.
