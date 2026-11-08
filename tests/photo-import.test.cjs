@@ -1,0 +1,8 @@
+const fs=require('node:fs'), vm=require('node:vm'), assert=require('node:assert/strict');
+const source=fs.readFileSync(require('node:path').join(__dirname,'..','app.js'),'utf8');
+const start=source.indexOf('function transcriptionRows('),end=source.indexOf('function importPhotoResponse()',start);
+const context={validateImportedProject:p=>p};vm.createContext(context);vm.runInContext(source.slice(start,end),context);
+const input={formato:'linde-foto-v2',titulo:'Predio',advertencias:['Revisar ángulo'],transcripcion:[{lectura:'5,90 m',ubicacion:'borde',certeza:'dudosa'}],croquis:[{nombre:'Plano',espacios:[{nombre:'Patio',puntos:[[0,0],[2,0],[2,2]],categoria:'libre'}],lineas:[{tipo:'muro',inicio:[0,0],fin:[2,0]}],cotas:[{inicio:[0,0],fin:[2,0],lectura:'5,90 m'}],textos:[{posicion:[1,1],texto:'Escalera'}]},{nombre:'Sin amarre',lineas:[{tipo:'linea',inicio:[0,0],fin:[1,1]}]}]};
+const result=context.parsePhotoDraft(input);assert.equal(result.length,2);assert.equal(result[0].floors[0].items.length,4);assert.equal(result[0].floors[0].items[0].count,false);assert.equal(result[0].floors[0].items[2].sourceLabel,'5,90 m');assert.ok(result[0].floors[0].items.every(i=>i.review));assert.equal(result[0].transcription[0].certeza,'dudosa');assert.throws(()=>context.parsePhotoDraft({formato:'linde-foto-v2',croquis:[{lineas:[{tipo:'desconocido'}]}]}));assert.throws(()=>context.parsePhotoDraft({formato:'linde-foto-v2',croquis:[{}]}));
+const old=context.parsePhotoDraft({formato:'linde-foto-v1',titulo:'Anterior',niveles:[{nombre:'Nivel 1',espacios:[{nombre:'Lote',categoria:'lote',puntos:[[0,0],[2,0],[2,2]]}]}]});assert.equal(old[0].floors[0].items[0].count,false);
+console.log('Importación de croquis: OK');
