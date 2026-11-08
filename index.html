@@ -24,8 +24,8 @@
       <div class="header-actions">
         <button class="btn btn-secondary" id="photoGuideBtn">Crear desde fotos</button>
         <button class="btn btn-ghost header-desktop" id="importBtn"><span data-icon="upload"></span> Importar</button>
-        <button class="btn btn-secondary" id="projectInfoBtn"><span data-icon="sliders"></span><span class="header-desktop-inline"> Ficha</span></button>
-        <button class="btn btn-primary" id="exportBtn"><span data-icon="download"></span><span class="header-desktop-inline"> Exportar</span></button>
+        <button class="btn btn-secondary" id="projectInfoBtn" aria-label="Ficha del inmueble" title="Ficha del inmueble"><span data-icon="sliders"></span><span class="header-desktop-inline"> Ficha</span></button>
+        <button class="btn btn-primary" id="exportBtn" aria-label="Exportar" title="Exportar"><span data-icon="download"></span><span class="header-desktop-inline"> Exportar</span></button>
         <button class="icon-btn mobile-only" id="toggleInspector" aria-label="Abrir propiedades" title="Propiedades"><span data-icon="panel-right"></span></button>
       </div>
     </header>
@@ -34,6 +34,7 @@
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-scroll">
           <div class="side-kicker"><span>ESPACIO DE TRABAJO</span><button class="tiny-icon" id="closeSidebar" title="Cerrar"><span data-icon="x"></span></button></div>
+          <button class="btn btn-secondary block mobile-only sidebar-mobile-action" id="mobilePhotoGuideBtn">Crear desde fotos</button><button class="btn btn-secondary block mobile-only sidebar-mobile-action" id="mobileImportBtn">Importar respaldo</button>
           <div class="side-section">
             <div class="section-top"><h2>Mis proyectos</h2><button class="tiny-icon border" id="newProjectBtn" title="Nuevo proyecto"><span data-icon="plus"></span></button></div>
             <div id="projectList" class="project-list"></div>
@@ -55,6 +56,7 @@
       </aside>
 
       <main class="stage" id="stage">
+        <div class="visit-bar"><button id="visitBtn" class="visit-button"><span data-icon="file-text"></span> Cuaderno de visita</button><span>Registra medidas y crea espacios</span></div>
         <div class="stage-top">
           <div class="stage-head"><span class="stage-caption">LIENZO DE TRABAJO</span><div class="stage-floor" id="stageFloorName">Nivel 1 <span data-icon="chevron-down"></span></div></div>
           <div class="stage-toolbar-actions"><button class="compact-btn" id="undoBtn" title="Deshacer (Ctrl+Z)" aria-label="Deshacer"><span data-icon="undo"></span></button><button class="compact-btn" id="redoBtn" title="Rehacer (Ctrl+Mayús+Z)" aria-label="Rehacer"><span data-icon="redo"></span></button><span class="toolbar-divider"></span><button class="compact-btn" id="fitBtn" title="Centrar plano"><span data-icon="maximize"></span></button><button class="compact-btn" id="zoomOutBtn" title="Alejar"><span data-icon="minus"></span></button><span class="zoom-label" id="zoomLabel">100%</span><button class="compact-btn" id="zoomInBtn" title="Acercar"><span data-icon="plus"></span></button></div>
@@ -69,7 +71,7 @@
           </svg>
           <div class="canvas-corner top-left"><div class="hint-chip"><span class="pulse-circle"></span><span id="toolHint">Selecciona un elemento para editar sus propiedades</span></div></div>
           <div class="canvas-corner bottom-right"><div class="north-indicator"><span class="north-arrow">↑</span><strong>N</strong></div></div>
-          <div id="drawingControls" class="drawing-controls hidden"><span id="drawingStatus">Marcando vértices</span><button id="finishDrawing" class="mini-btn dark">Terminar</button><button id="cancelDrawing" class="mini-btn">Cancelar</button></div>
+          <div id="drawingControls" class="drawing-controls hidden"><span id="drawingStatus">Marcando vértices</span><button id="removePoint" class="mini-btn">Quitar punto</button><button id="finishDrawing" class="mini-btn dark">Terminar</button><button id="cancelDrawing" class="mini-btn">Cancelar</button></div>
           <div id="toast" class="toast" role="status" aria-live="polite"></div>
         </div>
 

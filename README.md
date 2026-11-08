@@ -63,3 +63,9 @@ El respaldo de todos los proyectos se descarga desde Exportar → Respaldar todo
 ### Croquis con elementos abiertos
 
 Las instrucciones para ChatGPT solicitan formato `linde-foto-v2`: transcripción de lecturas, advertencias y croquis independientes con espacios, líneas, cotas y textos. Antes de crear los proyectos se muestra un resumen. Los elementos se marcan como pendientes de revisión; las áreas importadas quedan excluidas de las sumas. Una cota escrita es una lectura de la foto y no necesariamente coincide con la longitud de la línea dibujada. Los croquis sin amarre se guardan como proyectos separados. También se admite el formato anterior `linde-foto-v1`.
+
+## Cuaderno de visita en el celular
+
+Abre **Cuaderno de visita** para registrar espacios, medidas parciales y observaciones en el nivel activo. Puedes editar o eliminar apuntes y tomar fotos desde **Fotos del proyecto**. Cuando un apunte tenga ancho y largo, **Crear rectángulo** genera un espacio editable en el plano. Puedes ubicarlo por separado o al lado de un espacio existente; su posición es provisional y debe comprobarse; el rectángulo representa una forma regular y no reproduce un recinto irregular. Los cambios posteriores al apunte no alteran el dibujo ya creado. Los apuntes se incluyen en la ficha y en los respaldos JSON.
+
+El proyecto se guarda en el navegador y dispositivo actuales. Descarga un respaldo al terminar la visita para abrirlo en otro equipo. La aplicación no sincroniza datos entre dispositivos.
