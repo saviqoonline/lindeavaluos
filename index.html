@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f8fb">
+  <meta name="description" content="Linde: herramienta web de croquis, planos y medición de áreas para avalúos inmobiliarios.">
+  <title>Linde · Planos para avalúos</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell" id="app">
+    <header class="topbar">
+      <div class="brand-zone">
+        <button class="icon-btn mobile-only" id="toggleSidebar" aria-label="Abrir proyectos" title="Proyectos"><span data-icon="menu"></span></button>
+        <div class="brand-logo" aria-hidden="true"><span class="brand-mark"></span></div>
+        <div class="brand-word"><strong>linde<span class="brand-dot">.</span></strong><small>ESTUDIO DE INMUEBLES</small></div>
+      </div>
+      <div class="project-heading">
+        <span class="tag eyebrow">PLANO ACTIVO</span>
+        <div class="project-title-row"><h1 id="headerProjectName">Casa Los Pinos</h1><span class="save-dot" id="saveDot"></span><span id="saveText" class="save-text">Guardado</span></div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-ghost header-desktop" id="importBtn"><span data-icon="upload"></span> Importar</button>
+        <button class="btn btn-secondary" id="projectInfoBtn"><span data-icon="sliders"></span><span class="header-desktop-inline"> Ficha</span></button>
+        <button class="btn btn-primary" id="exportBtn"><span data-icon="download"></span><span class="header-desktop-inline"> Exportar</span></button>
+        <button class="icon-btn mobile-only" id="toggleInspector" aria-label="Abrir propiedades" title="Propiedades"><span data-icon="panel-right"></span></button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-scroll">
+          <div class="side-kicker"><span>ESPACIO DE TRABAJO</span><button class="tiny-icon" id="closeSidebar" title="Cerrar"><span data-icon="x"></span></button></div>
+          <div class="side-section">
+            <div class="section-top"><h2>Mis proyectos</h2><button class="tiny-icon border" id="newProjectBtn" title="Nuevo proyecto"><span data-icon="plus"></span></button></div>
+            <div id="projectList" class="project-list"></div>
+          </div>
+          <div class="side-section floors-section">
+            <div class="section-top"><h2>Niveles</h2><button class="tiny-icon border" id="newFloorBtn" title="Agregar nivel"><span data-icon="plus"></span></button></div>
+            <div id="floorList" class="floor-list"></div>
+          </div>
+          <div class="side-section">
+            <div class="section-top"><h2>Visualización</h2></div>
+            <label class="switch-row"><span><span data-icon="grid"></span> Cuadrícula</span><input type="checkbox" id="showGrid" checked><i></i></label>
+            <label class="switch-row"><span><span data-icon="magnet"></span> Ajustar a cuadrícula</span><input type="checkbox" id="useSnap" checked><i></i></label>
+            <label class="switch-row"><span><span data-icon="ruler"></span> Cotas al seleccionar</span><input type="checkbox" id="showCotas" checked><i></i></label>
+          </div>
+          <div class="tip-card"><span class="tip-icon" data-icon="lightbulb"></span><strong>Un plano a la vez, todo medido.</strong><p>Dibuja espacios en metros y Linde calcula sus áreas automáticamente.</p><button id="helpBtn" class="text-link">Ver guía rápida <span data-icon="arrow-up-right"></span></button></div>
+        </div>
+        <div class="sidebar-bottom"><span class="status-online"></span> Datos guardados en este navegador <span class="version">v1.0</span></div>
+      </aside>
+
+      <main class="stage" id="stage">
+        <div class="stage-top">
+          <div class="stage-head"><span class="stage-caption">LIENZO DE TRABAJO</span><div class="stage-floor" id="stageFloorName">Nivel 1 <span data-icon="chevron-down"></span></div></div>
+          <div class="stage-toolbar-actions"><button class="compact-btn" id="undoBtn" title="Deshacer (Ctrl+Z)" aria-label="Deshacer"><span data-icon="undo"></span></button><button class="compact-btn" id="redoBtn" title="Rehacer (Ctrl+Mayús+Z)" aria-label="Rehacer"><span data-icon="redo"></span></button><span class="toolbar-divider"></span><button class="compact-btn" id="fitBtn" title="Centrar plano"><span data-icon="maximize"></span></button><button class="compact-btn" id="zoomOutBtn" title="Alejar"><span data-icon="minus"></span></button><span class="zoom-label" id="zoomLabel">100%</span><button class="compact-btn" id="zoomInBtn" title="Acercar"><span data-icon="plus"></span></button></div>
+        </div>
+
+        <div class="canvas-wrap" id="canvasWrap">
+          <svg id="planSvg" xmlns="http://www.w3.org/2000/svg" aria-label="Editor de planos interactivo" role="img">
+            <defs><pattern id="gridPattern" patternUnits="userSpaceOnUse" width="48" height="48"><path id="gridPath" d="M48 0H0V48" fill="none" stroke="#e6eaf0" stroke-width=".85"/></pattern><pattern id="gridBigPattern" patternUnits="userSpaceOnUse" width="240" height="240"><path id="gridBigPath" d="M240 0H0V240" fill="none" stroke="#d6dce5" stroke-width="1"/></pattern></defs>
+            <rect id="gridSurface" x="0" y="0" width="100%" height="100%" fill="url(#gridPattern)"></rect>
+            <rect id="gridBigSurface" x="0" y="0" width="100%" height="100%" fill="url(#gridBigPattern)"></rect>
+            <g id="viewport"><g id="drawingObjects"></g><g id="selectionOverlay"></g><g id="draftOverlay"></g></g>
+          </svg>
+          <div class="canvas-corner top-left"><div class="hint-chip"><span class="pulse-circle"></span><span id="toolHint">Selecciona un elemento para editar sus propiedades</span></div></div>
+          <div class="canvas-corner bottom-right"><div class="north-indicator"><span class="north-arrow">↑</span><strong>N</strong></div></div>
+          <div id="drawingControls" class="drawing-controls hidden"><span id="drawingStatus">Marcando vértices</span><button id="finishDrawing" class="mini-btn dark">Terminar</button><button id="cancelDrawing" class="mini-btn">Cancelar</button></div>
+          <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="tools-bar-wrapper"><div class="tools-bar" role="toolbar" aria-label="Herramientas de dibujo">
+          <button class="tool active" data-tool="select" title="Seleccionar / mover (V)"><span data-icon="cursor"></span><span>Seleccionar</span><kbd>V</kbd></button>
+          <span class="tool-divider"></span>
+          <button class="tool" data-tool="rect" title="Dibujar área rectangular (R)"><span data-icon="square"></span><span>Rectángulo</span><kbd>R</kbd></button>
+          <button class="tool" data-tool="poly" title="Dibujar área libre (P)"><span data-icon="polygon"></span><span>Polígono</span><kbd>P</kbd></button>
+          <button class="tool" data-tool="wall" title="Dibujar muro (L)"><span data-icon="wall"></span><span>Muro</span></button>
+          <button class="tool" data-tool="door" title="Marcar puerta"><span data-icon="door"></span><span>Puerta</span></button>
+          <button class="tool" data-tool="window" title="Marcar ventana"><span data-icon="window"></span><span>Ventana</span></button>
+          <span class="tool-divider"></span>
+          <button class="tool" data-tool="measure" title="Medir distancia (M)"><span data-icon="ruler"></span><span>Medir</span><kbd>M</kbd></button>
+          <button class="tool" data-tool="text" title="Añadir anotación (T)"><span data-icon="type"></span><span>Texto</span></button>
+          <button class="tool" data-tool="pan" title="Mover lienzo (H)"><span data-icon="hand"></span><span>Mover</span></button>
+        </div></div>
+        <div class="stage-bottom"><span><span data-icon="crosshair"></span> <span id="cursorCoords">X 0,00 · Y 0,00 m</span></span><span class="stage-bottom-right"><span id="itemCount">0 elementos</span><span class="separator-dot">·</span> Escala gráfica <span id="scaleReadout">1 m</span></span></div>
+      </main>
+
+      <aside class="inspector" id="inspector"><div class="inspector-scroll">
+        <div class="inspector-title"><span>INSPECTOR</span><button class="tiny-icon" id="closeInspector" title="Cerrar"><span data-icon="x"></span></button></div>
+        <div id="inspectorContent"></div>
+      </div><div class="inspector-bottom"><button id="exportReportBtn" class="btn btn-outline block"><span data-icon="file-text"></span> Ficha de áreas / PDF</button></div></aside>
+    </div>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <input type="file" id="jsonFile" accept=".json,application/json" hidden>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><div><span class="modal-eyebrow" id="modalEyebrow">PROYECTO</span><h2 id="modalTitle">Nuevo proyecto</h2></div><button class="tiny-icon" id="modalClose" title="Cerrar"><span data-icon="x"></span></button></div>
+    <div id="modalBody" class="modal-body"></div>
+    <div id="modalFooter" class="modal-footer"></div>
+  </div></div>
+  <div id="printSheet" class="print-sheet"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
