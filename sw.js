@@ -1,0 +1,6 @@
+/* Almacena solamente la aplicación; los proyectos permanecen en el navegador. */
+const CACHE='linde-app-v-20261108-1';
+const ASSETS=['./','./index.html','./styles.css','./app.js','./avaluo.js','./favicon.svg'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('linde-app-v-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==self.location.origin)return;const path=url.pathname;const base=new URL('./',self.location).pathname;const allowed=path===base||ASSETS.slice(1).some(asset=>new URL(asset,self.location).pathname===path);if(!allowed)return;event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy)).catch(()=>{});}return response;}).catch(async()=>{const cache=await caches.open(CACHE);return await cache.match(event.request,{ignoreSearch:true})||Response.error();}));});

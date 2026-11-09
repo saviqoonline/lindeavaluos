@@ -56,7 +56,7 @@
       </aside>
 
       <main class="stage" id="stage">
-        <div class="visit-bar"><button id="visitBtn" class="visit-button"><span data-icon="file-text"></span> Cuaderno de visita</button><span>Registra medidas y crea espacios</span></div>
+        <div class="visit-bar"><button id="visitBtn" class="visit-button"><span data-icon="file-text"></span> Cuaderno de visita</button><button id="appraisalBtn" class="visit-button appraisal-button">Expediente del avalúo</button><span id="networkState" role="status"></span></div>
         <div class="stage-top">
           <div class="stage-head"><span class="stage-caption">LIENZO DE TRABAJO</span><div class="stage-floor" id="stageFloorName">Nivel 1 <span data-icon="chevron-down"></span></div></div>
           <div class="stage-toolbar-actions"><button class="compact-btn" id="undoBtn" title="Deshacer (Ctrl+Z)" aria-label="Deshacer"><span data-icon="undo"></span></button><button class="compact-btn" id="redoBtn" title="Rehacer (Ctrl+Mayús+Z)" aria-label="Rehacer"><span data-icon="redo"></span></button><span class="toolbar-divider"></span><button class="compact-btn" id="fitBtn" title="Centrar plano"><span data-icon="maximize"></span></button><button class="compact-btn" id="zoomOutBtn" title="Alejar"><span data-icon="minus"></span></button><span class="zoom-label" id="zoomLabel">100%</span><button class="compact-btn" id="zoomInBtn" title="Acercar"><span data-icon="plus"></span></button></div>
@@ -107,6 +107,7 @@
     <div id="modalFooter" class="modal-footer"></div>
   </div></div>
   <div id="printSheet" class="print-sheet"></div>
+  <script src="avaluo.js" defer></script>
   <script src="app.js" defer></script>
 </body>
 </html>

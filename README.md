@@ -6,9 +6,9 @@ App web estática para elaborar croquis sencillos de inmuebles con medidas en me
 
 1. Descomprime el ZIP completo.
 2. Abre `index.html` con Chrome, Edge, Firefox u otro navegador moderno.
-3. Para usarla desde cualquier celular con un enlace, publica **los cuatro archivos** (`index.html`, `styles.css`, `app.js`, `favicon.svg`) en una web estática, por ejemplo GitHub Pages o Netlify Drop. No requiere instalación ni servidor propio.
+3. Para usarla desde cualquier celular con un enlace, publica todos los archivos de la aplicación (`index.html`, `styles.css`, `app.js`, `avaluo.js`, `sw.js` y `favicon.svg`) en una web estática, por ejemplo GitHub Pages o Netlify Drop. No requiere instalación ni servidor propio.
 
-Es una **app web normal**, no una PWA: no lleva manifest, service worker ni opción de instalación incorporada.
+La aplicación guarda sus archivos para abrirlos sin conexión después de una primera visita con internet en HTTPS. No sincroniza proyectos entre dispositivos ni ofrece instalación incorporada.
 
 ## Funciones
 
@@ -69,3 +69,9 @@ Las instrucciones para ChatGPT solicitan formato `linde-foto-v2`: transcripción
 Abre **Cuaderno de visita** para registrar espacios, medidas parciales y observaciones en el nivel activo. Puedes editar o eliminar apuntes y tomar fotos desde **Fotos del proyecto**. Cuando un apunte tenga ancho y largo, **Crear rectángulo** genera un espacio editable en el plano. Puedes ubicarlo por separado o al lado de un espacio existente; su posición es provisional y debe comprobarse; el rectángulo representa una forma regular y no reproduce un recinto irregular. Los cambios posteriores al apunte no alteran el dibujo ya creado. Los apuntes se incluyen en la ficha y en los respaldos JSON.
 
 El proyecto se guarda en el navegador y dispositivo actuales. Descarga un respaldo al terminar la visita para abrirlo en otro equipo. La aplicación no sincroniza datos entre dispositivos.
+
+## Expediente de avalúo
+
+Desde **Expediente del avalúo** puedes registrar datos del encargo, observaciones de visita, metadatos de documentos y fuentes, áreas por fuente, comparables, cálculos y conciliación. Los datos se incluyen en el respaldo JSON y en el informe imprimible. Puedes adjuntar PDF de hasta 1 MB; se conservan localmente y en el respaldo. No se consultan ni descargan automáticamente documentos oficiales. El dictado depende del navegador, permiso de micrófono y posiblemente conexión. Las calculadoras son preliminares y requieren revisión profesional y comprobación de la metodología y requisitos aplicables; el valor final lo ingresa el profesional. Los datos se guardan en el navegador y no se sincronizan.
+
+Los archivos de la aplicación se almacenan para su uso sin conexión después de abrirla una vez con internet; las fuentes externas, ChatGPT y cualquier servicio remoto requieren conexión. Comprueba el funcionamiento sin conexión en el dispositivo antes de una visita y descarga respaldos periódicamente.
