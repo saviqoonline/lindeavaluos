@@ -1,5 +1,5 @@
 /* Almacena solamente la aplicación; los proyectos permanecen en el navegador. */
-const CACHE='linde-app-v-20261108-1';
+const CACHE='linde-app-v-20261116-1';
 const ASSETS=['./','./index.html','./styles.css','./app.js','./avaluo.js','./favicon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('linde-app-v-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
